@@ -161,23 +161,7 @@ function RuneCard({ listing, marketplace }) {
           {nft?.metadata?.description || "A legendary rune stone from the Elder Futhark collection. Each stone is a 1/1 artifact imbued with ancient power and wisdom."}
         </p>
         
-        {nft?.metadata?.attributes && (
-          <div className="rune-attributes">
-            {nft.metadata.attributes.map((attr, index) => (
-              <div key={index} className="rune-trait">
-                <span className="trait-type">{attr.trait_type}:</span>
-                <span className="trait-value">{attr.value}</span>
-              </div>
-            ))}
-          </div>
-        )}
-        
         <div className="price-section rune-price-section">
-          <div className="rune-price">
-            <span className="price-label">Sacred Offering:</span>
-            <span className="price-value">{priceInEth} ETH</span>
-          </div>
-          
           <Web3Button
             contractAddress={MARKETPLACE_ADDRESS}
             action={async (contract) => {
@@ -191,16 +175,16 @@ function RuneCard({ listing, marketplace }) {
               return tx;
             }}
             onSuccess={() => {
-              alert(`The sacred bond is formed! ${nft?.metadata?.name || `Rune Stone #${tokenId}`} has chosen you as its guardian! 🗿✨`);
+              alert(`Purchase successful! ${nft?.metadata?.name || `Rune Stone #${tokenId}`} is now yours! 🗿✨`);
               window.location.reload();
             }}
             onError={(error) => {
               console.error("Purchase failed:", error);
-              alert("The ancient powers resist. Please try again when the time is right.");
+              alert("Purchase failed. Please try again.");
             }}
             className="rune-buy-button"
           >
-            Claim Sacred Bond - {priceInEth} ETH
+            Buy Now - {priceInEth} ETH
           </Web3Button>
         </div>
       </div>
