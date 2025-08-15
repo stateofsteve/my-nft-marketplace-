@@ -45,41 +45,39 @@ export default function Roadmap() {
             </div>
           </div>
 
-          {/* Season 2 - Upcoming */}
-          <div className="season-block upcoming">
+          {/* Season 2 - NOW COMPLETED */}
+          <div className="season-block completed">
             <div className="season-badge">
               <span className="season-number">II</span>
             </div>
             <div className="season-content">
               <div className="season-header">
                 <h3>The Stones Awaken</h3>
-                <span className="season-status upcoming">Summer 2025</span>
+                <span className="season-status completed">Complete</span>
               </div>
-              <p className="season-description">The sacred circle calls forth its power. Twenty-four rune stones emerge, each bearing the weight of ancient wisdom.</p>
+              <p className="season-description">The sacred circle called forth its power. Twenty-four rune stones emerged, each bearing the weight of ancient wisdom.</p>
               <div className="milestone-list">
-                <div className="milestone">🗿 24 Elder Futhark Rune Stones launch</div>
-                
-                
-      
+                <div className="milestone done">✅ 24 Elder Futhark Rune Stones launched</div>
+                <div className="milestone done">✅ Sacred marketplace established</div>
+                <div className="milestone done">✅ Ancient powers awakened</div>
               </div>
             </div>
           </div>
 
-          {/* Season 3 - Future */}
-          <div className="season-block future">
+          {/* Season 3 - Now Upcoming */}
+          <div className="season-block upcoming">
             <div className="season-badge">
               <span className="season-number">III</span>
             </div>
             <div className="season-content">
               <div className="season-header">
                 <h3>The Living Legacy</h3>
-                <span className="season-status future">Fall 2025</span>
+                <span className="season-status upcoming">Fall 2025</span>
               </div>
               <p className="season-description">When legend touches reality, and the physical realm joins the digital awakening.</p>
               <div className="milestone-list">
                 <div className="milestone">🐎 Real horses transformed into NFTs</div>
                 <div className="milestone">📜 Expanded lore experiences</div>
-                
                 <div className="milestone">🤝 Strategic partnerships revealed</div>
               </div>
             </div>
@@ -98,7 +96,6 @@ export default function Roadmap() {
               <p className="season-description">Ancient spirits take new forms... The realm expands beyond the sacred circles... Some say warriors from a forgotten age stir...</p>
               <div className="milestone-list">
                 <div className="milestone">👾 A new 1,000 NFTs collection awakens</div>
-                
                 <div className="milestone">🏆 Community-driven events</div>
                 <div className="milestone">🔮 Secrets of the ancients revealed</div>
               </div>
