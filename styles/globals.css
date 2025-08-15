@@ -1,0 +1,1518 @@
+/* The Herd - Mystical Horse NFT Marketplace */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: linear-gradient(135deg, #2d3436 0%, #636e72 50%, #74b9ff 100%);
+  min-height: 100vh;
+  color: #2d3436;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  background: rgba(45, 52, 54, 0.9);
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 20px;
+}
+
+.title-container {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.title-main {
+  color: #fff;
+  font-size: 3.8em;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-family: 'Georgia', serif;
+  margin: 0;
+  text-shadow: 
+    3px 3px 0px #2d3436,
+    6px 6px 0px #636e72,
+    9px 9px 20px rgba(0,0,0,0.7);
+  text-transform: uppercase;
+}
+
+main {
+  background: rgba(45, 52, 54, 0.9);
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 500px;
+}
+
+/* Navigation styling */
+.main-nav {
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.nav-link.primary {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Header with logo styling (for homepage) */
+.header-with-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 25px 30px;
+}
+
+.site-logo {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  filter: sepia(20%) hue-rotate(200deg) brightness(1.1);
+}
+
+/* Header navigation styling (for homepage) */
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+  padding: 0 10px;
+}
+
+.header-nav .nav-link {
+  font-size: 0.9em;
+  padding: 8px 16px;
+}
+
+/* Hero tagline (for homepage) */
+.hero-tagline {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.hero-tagline p {
+  color: #fff;
+  font-family: 'Georgia', serif;
+  font-size: 3em;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0;
+  letter-spacing: 4px;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+/* Welcome section (for homepage) */
+.welcome-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.welcome-section h2 {
+  color: #fff;
+  font-family: 'Georgia', serif;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.welcome-section p {
+  color: #d2b48c;
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Email capture styling (for homepage) */
+.email-capture {
+  background: rgba(45, 52, 54, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 20px 0 30px 0;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.email-capture h3 {
+  color: #fff;
+  font-family: 'Georgia', serif;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.email-capture p {
+  color: #b2bec3;
+  font-family: 'Georgia', serif;
+  font-size: 1.1em;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.email-form {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.email-input {
+  flex: 1;
+  padding: 15px 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: 'Georgia', serif;
+  font-size: 1em;
+}
+
+.email-input::placeholder {
+  color: #b2bec3;
+}
+
+.subscribe-btn {
+  padding: 15px 30px !important;
+  border-radius: 25px !important;
+  background: linear-gradient(135deg, #74b9ff 0%, #00cec9 100%) !important;
+  white-space: nowrap !important;
+  width: auto !important;
+  border: none !important;
+  color: white !important;
+  font-family: 'Georgia', serif !important;
+  cursor: pointer !important;
+}
+
+/* Social Media Footer Styles (for homepage only) */
+.social-footer {
+  margin-top: 40px;
+  padding: 50px 40px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.social-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.social-footer h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.2em;
+  color: #ffffff;
+  margin-bottom: 25px;
+  font-weight: 400;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  font-size: 1em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  min-width: 120px;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.social-btn:hover .social-icon {
+  transform: scale(1.1);
+}
+
+.footer-profile-logo-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-logo-link {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.profile-logo-link:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.profile-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  object-fit: cover;
+}
+
+/* NFT Marketplace Styles (for thestables page) */
+.connect-prompt {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.connect-prompt h2 {
+  color: #ddd;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  font-family: 'Georgia', serif;
+  font-weight: normal;
+}
+
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.nft-card {
+  background: rgba(45, 52, 54, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.nft-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  background: rgba(45, 52, 54, 0.9);
+  border: 1px solid rgba(116, 185, 255, 0.3);
+}
+
+.nft-info h3 {
+  font-size: 1.4em;
+  color: #fff;
+  margin-bottom: 12px;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+}
+
+.description {
+  color: #b2bec3;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-size: 0.95em;
+  font-family: 'Georgia', serif;
+}
+
+.price-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 18px;
+}
+
+/* Button styling */
+button {
+  background: linear-gradient(135deg, #2d3436 0%, #636e72 100%) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 14px 28px !important;
+  color: white !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
+  font-family: 'Georgia', serif !important;
+  font-size: 1.05em !important;
+  letter-spacing: 0.5px !important;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%) !important;
+  box-shadow: 0 8px 20px rgba(45, 52, 54, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Fix the Connect Wallet button */
+header button {
+  width: auto !important;
+  min-width: 160px !important;
+  max-width: 200px !important;
+  padding: 12px 20px !important;
+  font-size: 0.9em !important;
+  white-space: nowrap !important;
+  align-self: flex-end;
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  background: linear-gradient(135deg, #2d3436 0%, #636e72 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* General text styling */
+h2 {
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: 1.4em;
+  font-family: 'Georgia', serif;
+  font-weight: normal;
+  opacity: 0.8;
+}
+
+p {
+  text-align: center;
+  color: #b2bec3;
+  font-size: 1.1em;
+  margin: 20px 0;
+  font-family: 'Georgia', serif;
+}
+
+/* Lore Page Styling */
+.lore-hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(139, 69, 19, 0.1));
+  border-radius: 25px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  margin-bottom: 60px;
+}
+
+.lore-hero h2 {
+  font-family: 'Georgia', serif;
+  font-size: 3em;
+  color: #daa520;
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+}
+
+.lore-hero p {
+  font-family: 'Georgia', serif;
+  font-size: 1.3em;
+  color: #d2b48c;
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Awakening Section */
+.awakening-section {
+  margin-bottom: 80px;
+  padding: 50px 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(205, 133, 63, 0.2);
+}
+
+.awakening-section h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.5em;
+  color: #daa520;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.awakening-story p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #e6d3b7;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.awakening-story em {
+  color: #daa520;
+  font-style: italic;
+}
+
+/* Aetts Section */
+.aetts-section {
+  margin-bottom: 80px;
+}
+
+.aetts-section h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.5em;
+  color: #daa520;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.aetts-intro {
+  font-family: 'Georgia', serif;
+  font-size: 1.3em;
+  color: #cd853f;
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 50px;
+}
+
+/* Aett Containers */
+.aett-container {
+  margin-bottom: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  overflow: hidden;
+}
+
+.aett-header {
+  width: 100%;
+  padding: 25px 30px;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.2), rgba(218, 165, 32, 0.1));
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.aett-header:hover {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.3), rgba(218, 165, 32, 0.2));
+}
+
+.aett-header.active {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.2), rgba(139, 69, 19, 0.2));
+}
+
+.aett-title {
+  font-family: 'Georgia', serif;
+  font-size: 1.8em;
+  color: #daa520;
+  font-weight: 500;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.aett-subtitle {
+  font-family: 'Georgia', serif;
+  font-size: 1.1em;
+  color: #cd853f;
+  font-style: italic;
+  display: block;
+}
+
+.expand-icon {
+  font-size: 1.5em;
+  color: #daa520;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+/* Aett Content */
+.aett-content {
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+.aett-content p {
+  font-family: 'Georgia', serif;
+  font-size: 1.1em;
+  color: #e6d3b7;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Horses Grid */
+.horses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.horse-card {
+  padding: 15px 20px;
+  background: rgba(218, 165, 32, 0.1);
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  border-radius: 10px;
+  font-family: 'Georgia', serif;
+  font-size: 1em;
+  color: #daa520;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.horse-card:hover {
+  background: rgba(218, 165, 32, 0.2);
+  border-color: #daa520;
+  transform: translateY(-2px);
+}
+
+/* Constellation Section */
+.constellation-section {
+  margin-bottom: 80px;
+  padding: 50px 40px;
+  background: linear-gradient(135deg, rgba(75, 0, 130, 0.1), rgba(139, 69, 19, 0.1));
+  border-radius: 20px;
+  border: 1px solid rgba(147, 112, 219, 0.3);
+}
+
+.constellation-section h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.3em;
+  color: #daa520;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.constellation-section p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #e6d3b7;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+}
+
+/* Eternal Section */
+.eternal-section {
+  margin-bottom: 80px;
+  padding: 50px 40px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.eternal-section h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.3em;
+  color: #daa520;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.eternal-section p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #e6d3b7;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+}
+
+.final-call {
+  font-style: italic !important;
+  color: #daa520 !important;
+  font-size: 1.3em !important;
+  margin-top: 40px !important;
+}
+
+/* Call to Action */
+.lore-cta {
+  text-align: center;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+  border-radius: 25px;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+.lore-cta h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.2em;
+  color: #daa520;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.lore-cta p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #d2b48c;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #daa520, #cd853f);
+  color: #1a1a1a;
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, #ffd700, #daa520);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(218, 165, 32, 0.3);
+}
+
+/* Roadmap Page Styling */
+.roadmap-hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(139, 69, 19, 0.1));
+  border-radius: 25px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  margin-bottom: 60px;
+}
+
+.roadmap-hero h2 {
+  font-family: 'Georgia', serif;
+  font-size: 3em;
+  color: #daa520;
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+}
+
+.roadmap-hero p {
+  font-family: 'Georgia', serif;
+  font-size: 1.3em;
+  color: #d2b48c;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Timeline Container */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 80px;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #daa520, rgba(218, 165, 32, 0.3));
+  border-radius: 2px;
+}
+
+/* Season Blocks */
+.season-block {
+  position: relative;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.season-block:nth-child(odd) {
+  flex-direction: row;
+}
+
+.season-block:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.season-block:nth-child(odd) .season-content {
+  margin-left: 80px;
+}
+
+.season-block:nth-child(even) .season-content {
+  margin-right: 80px;
+}
+
+/* Season Badge */
+.season-badge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Georgia', serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.completed .season-badge {
+  background: linear-gradient(135deg, #daa520, #cd853f);
+  color: #1a1a1a;
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
+}
+
+.upcoming .season-badge {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);
+}
+
+.future .season-badge {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  color: white;
+  box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+}
+
+.mystery .season-badge {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  color: #ecf0f1;
+  box-shadow: 0 0 20px rgba(52, 73, 94, 0.4);
+}
+
+.distant .season-badge {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(205, 133, 63, 0.3));
+  border: 2px solid rgba(218, 165, 32, 0.5);
+  color: #daa520;
+}
+
+/* Season Content */
+.season-content {
+  flex: 1;
+  max-width: 400px;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.completed .season-content {
+  background: rgba(218, 165, 32, 0.1);
+  border-color: rgba(218, 165, 32, 0.3);
+}
+
+.upcoming .season-content {
+  background: rgba(74, 144, 226, 0.1);
+  border-color: rgba(74, 144, 226, 0.3);
+}
+
+.future .season-content {
+  background: rgba(155, 89, 182, 0.1);
+  border-color: rgba(155, 89, 182, 0.3);
+}
+
+.mystery .season-content {
+  background: rgba(52, 73, 94, 0.2);
+  border-color: rgba(52, 73, 94, 0.4);
+}
+
+/* Season Header */
+.season-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.season-header h3 {
+  font-family: 'Georgia', serif;
+  font-size: 1.8em;
+  color: #daa520;
+  margin: 0;
+  font-weight: 400;
+}
+
+.season-status {
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  font-family: 'Georgia', serif;
+  font-weight: 500;
+}
+
+.season-status.completed {
+  background: rgba(39, 174, 96, 0.2);
+  color: #27ae60;
+  border: 1px solid rgba(39, 174, 96, 0.4);
+}
+
+.season-status.upcoming {
+  background: rgba(74, 144, 226, 0.2);
+  color: #4a90e2;
+  border: 1px solid rgba(74, 144, 226, 0.4);
+}
+
+.season-status.future {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+  border: 1px solid rgba(155, 89, 182, 0.4);
+}
+
+.season-status.mystery {
+  background: rgba(52, 73, 94, 0.2);
+  color: #ecf0f1;
+  border: 1px solid rgba(52, 73, 94, 0.4);
+}
+
+.season-status.distant {
+  background: rgba(218, 165, 32, 0.1);
+  color: #daa520;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+/* Season Description */
+.season-description {
+  font-family: 'Georgia', serif;
+  font-size: 1.1em;
+  color: #e6d3b7;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Milestones */
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.milestone {
+  font-family: 'Georgia', serif;
+  font-size: 1em;
+  color: #d2b48c;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(218, 165, 32, 0.1);
+}
+
+.milestone.done {
+  color: #27ae60;
+}
+
+.milestone:last-child {
+  border-bottom: none;
+}
+
+/* Community Section */
+.community-section {
+  margin-bottom: 80px;
+  padding: 50px 40px;
+  background: linear-gradient(135deg, rgba(75, 0, 130, 0.1), rgba(139, 69, 19, 0.1));
+  border-radius: 20px;
+  border: 1px solid rgba(147, 112, 219, 0.3);
+  text-align: center;
+}
+
+.community-section h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.3em;
+  color: #daa520;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.community-section > p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #d2b48c;
+  font-style: italic;
+  margin-bottom: 40px;
+}
+
+.community-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  text-align: center;
+}
+
+.benefit-card h4 {
+  font-family: 'Georgia', serif;
+  font-size: 1.3em;
+  color: #daa520;
+  margin-bottom: 15px;
+}
+
+.benefit-card p {
+  font-family: 'Georgia', serif;
+  color: #e6d3b7;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Call to Action */
+.roadmap-cta {
+  text-align: center;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+  border-radius: 25px;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+.roadmap-cta h3 {
+  font-family: 'Georgia', serif;
+  font-size: 2.2em;
+  color: #daa520;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.roadmap-cta p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #d2b48c;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .header-with-logo {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .site-logo {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .title-main {
+    font-size: 2.5em;
+    letter-spacing: 1px;
+  }
+  
+  .hero-tagline p {
+    font-size: 2em;
+    letter-spacing: 2px;
+  }
+  
+  .header-nav {
+    gap: 3px !important;
+    margin-top: 15px !important;
+    padding: 0 5px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+  
+  .header-nav .nav-link {
+    font-size: 0.65em !important;
+    padding: 6px 8px !important;
+    letter-spacing: 0.3px !important;
+    margin: 2px !important;
+  }
+  
+  .main-nav {
+    padding: 15px 5px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+  
+  .main-nav .nav-link {
+    font-size: 0.65em !important;
+    padding: 6px 8px !important;
+    margin: 3px 2px !important;
+    letter-spacing: 0.3px !important;
+    border-radius: 20px !important;
+    white-space: nowrap;
+  }
+  
+  .email-form {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .email-input, .subscribe-btn {
+    width: 100% !important;
+  }
+  
+  .social-footer {
+    margin-top: 30px;
+    padding: 40px 25px;
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .social-btn {
+    width: 180px;
+  }
+  
+  .lore-hero h2 {
+    font-size: 2.2em;
+  }
+  
+  .lore-hero p {
+    font-size: 1.1em;
+  }
+  
+  .awakening-section, .constellation-section, .eternal-section {
+    padding: 30px 20px;
+  }
+  
+  .aett-header {
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .aett-title {
+    font-size: 1.5em;
+  }
+  
+  .horses-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .expand-icon {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .timeline-container::before {
+    left: 30px;
+  }
+  
+  .season-block {
+    flex-direction: column !important;
+    padding-left: 80px;
+  }
+  
+  .season-badge {
+    left: 30px !important;
+    transform: none !important;
+  }
+  
+  .season-block:nth-child(odd) .season-content,
+  .season-block:nth-child(even) .season-content {
+    margin: 0;
+  }
+  
+  .season-content {
+    max-width: none;
+    padding: 20px;
+  }
+  
+  .roadmap-hero h2 {
+    font-size: 2.2em;
+  }
+  
+  .community-section {
+    padding: 30px 20px;
+  }
+  
+  .community-benefits {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+  .main-nav .nav-link {
+    font-size: 0.6em !important;
+    padding: 5px 7px !important;
+    margin: 2px 1px !important;
+  }
+}
+
+/* Runes Marketplace Specific Styles */
+
+/* Runes Hero Tagline */
+.hero-tagline p {
+  background: linear-gradient(45deg, #daa520, #cd853f, #b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/* Runes Introduction */
+.runes-intro {
+  text-align: center;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+  border-radius: 20px;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  margin-bottom: 40px;
+}
+
+.runes-intro h2 {
+  font-family: 'Georgia', serif;
+  font-size: 2.5em;
+  color: #daa520;
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
+}
+
+.runes-intro p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #e6d3b7;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* Collection Title */
+.collection-title {
+  font-family: 'Georgia', serif;
+  font-size: 1.8em;
+  color: #cd853f;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.loading-state p {
+  font-family: 'Georgia', serif;
+  font-size: 1.3em;
+  color: #cd853f;
+  font-style: italic;
+}
+
+/* No Listings State */
+.no-listings {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(205, 133, 63, 0.05));
+  border-radius: 20px;
+  border: 1px solid rgba(139, 69, 19, 0.3);
+}
+
+.no-listings p {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  color: #cd853f;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.no-listings p:last-child {
+  color: #b8860b;
+  font-size: 1.1em;
+}
+
+/* Rune Card Styling */
+.rune-card {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.2), rgba(205, 133, 63, 0.1));
+  border: 2px solid rgba(218, 165, 32, 0.3);
+  transition: all 0.4s ease;
+}
+
+.rune-card:hover {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.3), rgba(205, 133, 63, 0.2));
+  border-color: #daa520;
+  box-shadow: 0 16px 40px rgba(218, 165, 32, 0.3);
+  transform: translateY(-10px);
+}
+
+/* Rune Image Container */
+.rune-image-container {
+  width: 300px;
+  height: 300px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+  border: 2px solid rgba(218, 165, 32, 0.3);
+  transition: all 0.3s ease;
+}
+
+.rune-card:hover .rune-image-container {
+  border-color: #daa520;
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+}
+
+/* Rune Placeholder */
+.rune-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.3), rgba(205, 133, 63, 0.2));
+  color: #daa520;
+  text-align: center;
+}
+
+.rune-symbol {
+  font-size: 4em;
+  margin-bottom: 15px;
+  text-shadow: 0 0 15px rgba(218, 165, 32, 0.6);
+}
+
+.placeholder-text {
+  font-family: 'Georgia', serif;
+}
+
+.placeholder-text > div:first-child {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Rune Info */
+.rune-info h3 {
+  color: #daa520;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+}
+
+.rune-description {
+  color: #e6d3b7;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Rune Attributes */
+.rune-attributes {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.rune-trait {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(218, 165, 32, 0.1);
+  font-family: 'Georgia', serif;
+  font-size: 0.9em;
+}
+
+.rune-trait:last-child {
+  border-bottom: none;
+}
+
+.trait-type {
+  color: #cd853f;
+  font-weight: 500;
+}
+
+.trait-value {
+  color: #daa520;
+  font-style: italic;
+}
+
+/* Rune Price Section */
+.rune-price-section {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.rune-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-family: 'Georgia', serif;
+}
+
+.price-label {
+  color: #cd853f;
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+.price-value {
+  color: #daa520;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
+}
+
+/* Rune Buy Button */
+.rune-buy-button {
+  background: linear-gradient(135deg, #daa520 0%, #cd853f 100%) !important;
+  border: 2px solid #b8860b !important;
+  color: #1a1a1a !important;
+  font-family: 'Georgia', serif !important;
+  font-size: 1.1em !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+  padding: 15px 20px !important;
+  border-radius: 25px !important;
+  transition: all 0.3s ease !important;
+  text-shadow: none !important;
+}
+
+.rune-buy-button:hover {
+  background: linear-gradient(135deg, #ffd700 0%, #daa520 100%) !important;
+  border-color: #daa520 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(218, 165, 32, 0.4) !important;
+}
+
+/* Connect Prompt for Runes */
+.connect-prompt h2 {
+  color: #daa520;
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
+}
+
+.connect-prompt p {
+  color: #cd853f;
+  font-size: 1.2em;
+  font-style: italic;
+  margin-top: 15px;
+}
+
+/* Mobile Responsive for Runes */
+@media (max-width: 768px) {
+  .runes-intro {
+    padding: 30px 20px;
+  }
+  
+  .runes-intro h2 {
+    font-size: 2em;
+  }
+  
+  .runes-intro p {
+    font-size: 1.1em;
+  }
+  
+  .hero-tagline p {
+    font-size: 2em;
+    letter-spacing: 2px;
+  }
+  
+  .rune-image-container {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .rune-symbol {
+    font-size: 3em;
+  }
+  
+  .rune-attributes {
+    padding: 12px;
+  }
+  
+  .rune-trait {
+    font-size: 0.85em;
+  }
+}
