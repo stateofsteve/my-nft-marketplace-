@@ -1,9 +1,25 @@
+import Image from 'next/image';
+import { useState } from 'react';
+import { validateEmail, sanitizeInput } from '../utils/validation';
+import SEOHead from '../components/SEOHead';
+
 export default function Home() {
+  const [emailError, setEmailError] = useState('');
   return (
+    <>
+      <SEOHead />
+    
     <div className="container">
       <header>
         <div className="header-with-logo">
-          <img src="/images/logo.jpg" alt="Appaloosa Dreams Logo" className="site-logo" />
+          <Image 
+            src="/images/logo.jpg" 
+            alt="Appaloosa Dreams Logo" 
+            className="site-logo"
+            width={100}
+            height={100}
+            priority
+          />
           <div className="title-container">
             <h1 className="title-main">Appaloosa Dreams</h1>
             <nav className="header-nav">
@@ -24,7 +40,7 @@ export default function Home() {
         {/* Hero Video Section */}
         <div className="hero-video-section" style={{
           textAlign: 'center',
-          marginBottom: '40px'
+          marginBottom: '30px'
         }}>
           <video 
             autoPlay 
@@ -35,10 +51,11 @@ export default function Home() {
             style={{
               width: '100%',
               maxWidth: '800px',
-              height: '450px',
+              height: 'auto',
+              aspectRatio: '16/9',
               objectFit: 'cover',
-              borderRadius: '20px',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+              borderRadius: '15px',
+              boxShadow: '0 6px 24px rgba(0,0,0,0.3)'
             }}
           >
             <source src="/videos/video1.mp4" type="video/mp4" />
@@ -63,7 +80,17 @@ export default function Home() {
             onSubmit={async (e) => {
               e.preventDefault();
               
-              const email = e.target.email.value;
+              const email = sanitizeInput(e.target.email.value);
+              const validation = validateEmail(email);
+              
+              // Clear previous errors
+              setEmailError('');
+              
+              if (!validation.isValid) {
+                setEmailError(validation.error);
+                return;
+              }
+              
               const submitBtn = e.target.querySelector('.subscribe-btn');
               const successMsg = document.getElementById('success-message');
               
@@ -80,15 +107,17 @@ export default function Home() {
                   body: JSON.stringify({ email })
                 });
                 
+                const data = await response.json();
+                
                 if (response.ok) {
                   // Show success message (same styling as before!)
                   successMsg.style.display = 'block';
                   e.target.reset();
                 } else {
-                  alert('Something went wrong. Please try again.');
+                  setEmailError(data.error || 'Something went wrong. Please try again.');
                 }
               } catch (error) {
-                alert('Network error. Please try again.');
+                setEmailError('Network error. Please try again.');
                 console.error('Subscription error:', error);
               }
               
@@ -107,6 +136,20 @@ export default function Home() {
             />
             <button type="submit" className="subscribe-btn">Subscribe</button>
           </form>
+          
+          {emailError && (
+            <div className="error-message" style={{
+              marginTop: '15px',
+              padding: '12px',
+              background: 'rgba(220, 53, 69, 0.2)',
+              color: '#dc3545',
+              textAlign: 'center',
+              borderRadius: '8px',
+              fontFamily: 'Georgia, serif'
+            }}>
+              ⚠️ {emailError}
+            </div>
+          )}
           
           <div id="success-message" style={{
             display: 'none', 
@@ -147,10 +190,12 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="profile-logo-link"
               >
-                <img 
+                <Image 
                   src="/images/profile-photo.jpg" 
                   alt="Profile" 
                   className="profile-logo"
+                  width={60}
+                  height={60}
                 />
               </a>
             </div>
@@ -170,5 +215,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

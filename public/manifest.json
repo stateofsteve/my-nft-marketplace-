@@ -1,0 +1,43 @@
+{
+  "name": "Appaloosa Dreams - Mystical Horse NFTs",
+  "short_name": "Appaloosa Dreams",
+  "description": "Enter the ethereal realm where 24 mystical Appaloosa horses await their chosen guardians.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2d3436",
+  "theme_color": "#daa520",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["entertainment", "lifestyle", "finance"],
+  "screenshots": [
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ]
+}

@@ -1,19 +1,36 @@
 import { Resend } from 'resend';
+import { validateEmail, sanitizeInput, isRateLimited } from '../../utils/validation';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Simple in-memory store for rate limiting (in production, use Redis)
+const requestTimes = new Map();
 
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
   
-  // Get the email from the request
-  const { email } = req.body;
+  // Rate limiting
+  const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'unknown';
+  const userRequests = requestTimes.get(clientIP) || [];
   
-  // Basic email validation
-  if (!email || !email.includes('@')) {
-    return res.status(400).json({ message: 'Invalid email address' });
+  if (isRateLimited(userRequests)) {
+    return res.status(429).json({ error: 'Too many requests. Please try again in a minute.' });
+  }
+  
+  // Add current request time
+  userRequests.push(Date.now());
+  requestTimes.set(clientIP, userRequests);
+  
+  // Get and validate email
+  const rawEmail = req.body?.email;
+  const email = sanitizeInput(rawEmail);
+  const validation = validateEmail(email);
+  
+  if (!validation.isValid) {
+    return res.status(400).json({ error: validation.error });
   }
   
   try {
@@ -48,6 +65,6 @@ export default async function handler(req, res) {
     
   } catch (error) {
     console.error('Subscription error:', error);
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ error: 'Something went wrong. Please try again.' });
   }
 }

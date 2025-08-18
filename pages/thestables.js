@@ -9,6 +9,9 @@ import {
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
+import { GridSkeleton, LoadingSpinner } from "../components/LoadingSkeleton";
+import { useWalletPersistence } from "../hooks/useWalletPersistence";
+import SEOHead from "../components/SEOHead";
 
 const NFT_COLLECTION_ADDRESS = "0x0031eE064Fc9aB096cf1D58Be09037Aa13d11Da7";
 const MARKETPLACE_ADDRESS = "0x54d4043B7aE1ed9750b051F74852f2C30EF02Fa9";
@@ -18,6 +21,7 @@ export default function TheHerd() {
   const { contract: marketplace } = useContract(MARKETPLACE_ADDRESS);
   const [allListings, setAllListings] = useState([]);
   const [loadingListings, setLoadingListings] = useState(true);
+  const { connectionStatus, isAutoConnecting } = useWalletPersistence();
   
   const { data: totalListings } = useContractRead(marketplace, "totalListings");
 
@@ -59,6 +63,12 @@ export default function TheHerd() {
   const totalListingsString = totalListings ? totalListings.toString() : "Loading...";
 
   return (
+    <>
+      <SEOHead 
+        title="The Stables - Appaloosa Dreams NFT Marketplace"
+        description="Discover and purchase mystical Appaloosa horse NFTs. Connect your wallet to explore available horses with sacred runes and ancient wisdom."
+        url="https://appaloosadreams.com/thestables"
+      />
     <div className="container">
       <header>
         <div className="title-container">
@@ -83,13 +93,16 @@ export default function TheHerd() {
         {!address ? (
           <div className="connect-prompt">
             <h2>Connect your wallet to view and purchase NFTs</h2>
+            {isAutoConnecting && (
+              <LoadingSpinner size="small" text="Reconnecting to your wallet..." />
+            )}
           </div>
         ) : (
           <div>
             <h2>Available NFTs ({allListings.length} showing of {totalListingsString} total)</h2>
             
             {loadingListings ? (
-              <p>Loading all {totalListingsString} NFTs...</p>
+              <GridSkeleton count={6} />
             ) : (
               <div className="nft-grid">
                 {allListings.length > 0 ? (
@@ -97,7 +110,13 @@ export default function TheHerd() {
                     <NFTCard key={index} listing={listing} marketplace={marketplace} />
                   ))
                 ) : (
-                  <p>No active listings found</p>
+                  <div style={{ textAlign: 'center', padding: '40px' }}>
+                    <h3 style={{ color: '#daa520', marginBottom: '20px' }}>No Active Listings</h3>
+                    <p style={{ color: '#fff', fontSize: '1.1em' }}>
+                      The mystical horses are currently resting in the ethereal realm. 
+                      Check back soon for new arrivals! 🐎
+                    </p>
+                  </div>
                 )}
               </div>
             )}
@@ -105,6 +124,7 @@ export default function TheHerd() {
         )}
       </main>
     </div>
+    </>
   );
 }
 
