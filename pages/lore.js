@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEOHead from '../components/SEOHead';
 
 export default function Lore() {
   const [activeAett, setActiveAett] = useState(null);
@@ -8,6 +9,12 @@ export default function Lore() {
   };
 
   return (
+    <>
+      <SEOHead 
+        title="Explore the Lore - Ancient Awakening of Appaloosa Dreams"
+        description="Discover the mystical origins of 24 sacred horses awakened from ancient rune stones. Journey through three circles of power: Freyr's Awakeners, Hagal's Transformers, and Tyr's Completers in this epic NFT legend."
+        url="https://appaloosadreams.com/lore"
+      />
     <div className="container">
       <header>
         <div className="title-container">
@@ -171,5 +178,6 @@ export default function Lore() {
         </div>
       </main>
     </div>
+    </>
   );
 }

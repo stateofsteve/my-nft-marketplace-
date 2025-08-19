@@ -1,5 +1,13 @@
+import SEOHead from '../components/SEOHead';
+
 export default function Roadmap() {
   return (
+    <>
+      <SEOHead 
+        title="Roadmap - The Journey Ahead | Appaloosa Dreams NFT"
+        description="Explore the five-season journey of Appaloosa Dreams NFT. From awakened horses to Elder Futhark runes, discover upcoming real horse NFTs, exclusive collections, and community-driven experiences."
+        url="https://appaloosadreams.com/roadmap"
+      />
     <div className="container">
       <header>
         <div className="title-container">
@@ -151,5 +159,6 @@ export default function Roadmap() {
         </div>
       </main>
     </div>
+    </>
   );
 }

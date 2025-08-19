@@ -9,6 +9,7 @@ import {
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
+import SEOHead from "../components/SEOHead";
 
 const NFT_COLLECTION_ADDRESS = "0xf78f017B9894311B702e0CF297b72a2ACA592226";
 const MARKETPLACE_ADDRESS = "0x440C67F5838f9F60779A17629650c59EfF6576e6";
@@ -70,6 +71,12 @@ export default function TheRunes() {
   const totalListingsString = totalListings ? totalListings.toString() : "Loading...";
 
   return (
+    <>
+      <SEOHead 
+        title="The Runes - Sacred Elder Futhark Stones | Appaloosa Dreams"
+        description="Discover 24 legendary Elder Futhark rune stones - sacred 1/1 NFT artifacts imbued with ancient wisdom. Connect your wallet to purchase these mystical vessels of power from the awakened stone circle."
+        url="https://appaloosadreams.com/therunes"
+      />
     <div className="container">
       <header>
         <div className="title-container">
@@ -135,6 +142,7 @@ export default function TheRunes() {
         )}
       </main>
     </div>
+    </>
   );
 }
 
