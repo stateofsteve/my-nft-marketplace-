@@ -32,17 +32,28 @@ export default function TheRunes() {
         const listings = [];
         const totalCount = parseInt(totalListings.toString());
         
+        // Create all promises at once for parallel execution
+        const listingPromises = [];
         for (let i = 0; i < totalCount; i++) {
-          try {
-            const listing = await marketplace.call("getListing", [i]);
-            if (listing && listing.status === 1) {
-              listings.push(listing);
-              console.log(`Loaded rune listing ${i}:`, listing);
-            }
-          } catch (error) {
-            console.log(`Rune listing ${i} failed to load:`, error);
-          }
+          listingPromises.push(
+            marketplace.call("getListing", [i])
+              .then(listing => ({ listing, index: i, success: true }))
+              .catch(error => ({ error, index: i, success: false }))
+          );
         }
+        
+        // Wait for all listings to load in parallel
+        const results = await Promise.all(listingPromises);
+        
+        // Process results
+        results.forEach(({ listing, error, index, success }) => {
+          if (!success) {
+            console.log(`Rune listing ${index} failed to load:`, error);
+          } else if (listing && listing.status === 1) {
+            listings.push(listing);
+            console.log(`Loaded rune listing ${index}:`, listing);
+          }
+        });
         
         console.log("All rune listings loaded:", listings);
         setAllListings(listings);
@@ -97,6 +108,14 @@ export default function TheRunes() {
             {loadingListings ? (
               <div className="loading-state">
                 <p>The ancient stones are stirring... Loading {totalListingsString} sacred artifacts...</p>
+                <div style={{ 
+                  textAlign: 'center', 
+                  marginTop: '15px', 
+                  color: '#daa520',
+                  fontSize: '0.95em'
+                }}>
+                  Fetching blockchain data in parallel for faster loading ⚡
+                </div>
               </div>
             ) : (
               <div className="nft-grid">

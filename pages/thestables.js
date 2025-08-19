@@ -21,6 +21,7 @@ export default function TheHerd() {
   const { contract: marketplace } = useContract(MARKETPLACE_ADDRESS);
   const [allListings, setAllListings] = useState([]);
   const [loadingListings, setLoadingListings] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const { connectionStatus, isAutoConnecting } = useWalletPersistence();
   
   const { data: totalListings } = useContractRead(marketplace, "totalListings");
@@ -31,22 +32,34 @@ export default function TheHerd() {
       
       console.log("Fetching all", totalListings.toString(), "listings...");
       setLoadingListings(true);
+      setLoadingProgress(0);
       
       try {
         const listings = [];
         const totalCount = parseInt(totalListings.toString());
         
+        // Create all promises at once for parallel execution
+        const listingPromises = [];
         for (let i = 0; i < totalCount; i++) {
-          try {
-            const listing = await marketplace.call("getListing", [i]);
-            if (listing && listing.status === 1) {
-              listings.push(listing);
-              console.log(`Loaded listing ${i}:`, listing);
-            }
-          } catch (error) {
-            console.log(`Listing ${i} failed to load:`, error);
-          }
+          listingPromises.push(
+            marketplace.call("getListing", [i])
+              .then(listing => ({ listing, index: i, success: true }))
+              .catch(error => ({ error, index: i, success: false }))
+          );
         }
+        
+        // Wait for all listings to load in parallel
+        const results = await Promise.all(listingPromises);
+        
+        // Process results
+        results.forEach(({ listing, error, index, success }) => {
+          if (!success) {
+            console.log(`Listing ${index} failed to load:`, error);
+          } else if (listing && listing.status === 1) {
+            listings.push(listing);
+            console.log(`Loaded listing ${index}:`, listing);
+          }
+        });
         
         console.log("All listings loaded:", listings);
         setAllListings(listings);
@@ -102,7 +115,17 @@ export default function TheHerd() {
             <h2>Available NFTs ({allListings.length} showing of {totalListingsString} total)</h2>
             
             {loadingListings ? (
-              <GridSkeleton count={6} />
+              <div>
+                <GridSkeleton count={6} />
+                <div style={{ 
+                  textAlign: 'center', 
+                  marginTop: '20px', 
+                  color: '#daa520',
+                  fontSize: '1.1em'
+                }}>
+                  Loading marketplace data... This may take a few moments ⏳
+                </div>
+              </div>
             ) : (
               <div className="nft-grid">
                 {allListings.length > 0 ? (
