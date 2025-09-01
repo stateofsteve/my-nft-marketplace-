@@ -15,16 +15,26 @@ export default function Home() {
           method: 'POST',
         });
         const data = await response.json();
-        setVisitorCount(data.count);
+        if (typeof data.count === 'number') {
+          setVisitorCount(data.count);
+        } else {
+          setVisitorCount(0);
+        }
       } catch (error) {
         console.error('Failed to update visitor count:', error);
         // Fallback: try to get current count without incrementing
         try {
           const response = await fetch('/api/visitor-count');
           const data = await response.json();
-          setVisitorCount(data.count);
+          if (typeof data.count === 'number') {
+            setVisitorCount(data.count);
+          } else {
+            setVisitorCount(0);
+          }
         } catch (fallbackError) {
           console.error('Failed to get visitor count:', fallbackError);
+          // Set to 0 as final fallback
+          setVisitorCount(0);
         }
       }
     };
@@ -243,7 +253,7 @@ export default function Home() {
           {/* Visitor Counter */}
           <div className="visitor-counter">
             <div className="visitor-count-text">
-              {visitorCount !== null ? (
+              {visitorCount !== null && typeof visitorCount === 'number' ? (
                 <>
                   <span className="count-label">Visitors: </span>
                   <span className="count-number">{visitorCount.toLocaleString()}</span>
