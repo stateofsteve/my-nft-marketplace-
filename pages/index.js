@@ -245,17 +245,11 @@ export default function Home() {
             <div className="visitor-count-text">
               {visitorCount !== null ? (
                 <>
-                  <span className="mystical-symbol">✨</span>
                   <span className="count-label">Visitors: </span>
                   <span className="count-number">{visitorCount.toLocaleString()}</span>
-                  <span className="mystical-symbol">✨</span>
                 </>
               ) : (
-                <>
-                  <span className="mystical-symbol">✨</span>
-                  <span className="count-label">Counting visitors...</span>
-                  <span className="mystical-symbol">✨</span>
-                </>
+                <span className="count-label">Counting visitors...</span>
               )}
             </div>
           </div>
