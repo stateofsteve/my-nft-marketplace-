@@ -1,10 +1,37 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { validateEmail, sanitizeInput } from '../utils/validation';
 import SEOHead from '../components/SEOHead';
 
 export default function Home() {
   const [emailError, setEmailError] = useState('');
+  const [visitorCount, setVisitorCount] = useState(null);
+  
+  useEffect(() => {
+    const updateVisitorCount = async () => {
+      try {
+        // Increment the visitor count
+        const response = await fetch('/api/visitor-count', {
+          method: 'POST',
+        });
+        const data = await response.json();
+        setVisitorCount(data.count);
+      } catch (error) {
+        console.error('Failed to update visitor count:', error);
+        // Fallback: try to get current count without incrementing
+        try {
+          const response = await fetch('/api/visitor-count');
+          const data = await response.json();
+          setVisitorCount(data.count);
+        } catch (fallbackError) {
+          console.error('Failed to get visitor count:', fallbackError);
+        }
+      }
+    };
+    
+    updateVisitorCount();
+  }, []);
+  
   return (
     <>
       <SEOHead />
@@ -211,6 +238,26 @@ export default function Home() {
               </svg>
               <span>Follow on X</span>
             </a>
+          </div>
+          
+          {/* Visitor Counter */}
+          <div className="visitor-counter">
+            <div className="visitor-count-text">
+              {visitorCount !== null ? (
+                <>
+                  <span className="mystical-symbol">✨</span>
+                  <span className="count-label">Visitors: </span>
+                  <span className="count-number">{visitorCount.toLocaleString()}</span>
+                  <span className="mystical-symbol">✨</span>
+                </>
+              ) : (
+                <>
+                  <span className="mystical-symbol">✨</span>
+                  <span className="count-label">Counting visitors...</span>
+                  <span className="mystical-symbol">✨</span>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </footer>
