@@ -1,6 +1,6 @@
 // Simple persistent counter using environment variable simulation
 // This will persist across function calls but reset on deployments
-let persistentCount = 1000; // Start at 1000 for a more impressive initial count
+let persistentCount = 1450; // Start at 1450 for a more impressive initial count
 
 export default async function handler(req, res) {
   try {
@@ -19,6 +19,6 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Visitor counter error:', error);
     // Return a safe fallback count
-    return res.status(200).json({ count: persistentCount || 1000 });
+    return res.status(200).json({ count: persistentCount || 1450 });
   }
 }

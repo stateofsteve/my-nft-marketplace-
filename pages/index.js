@@ -25,7 +25,7 @@ export default function Home() {
             setVisitorCount(data.count);
             localStorage.setItem('lastVisit', today);
           } else {
-            setVisitorCount(1000);
+            setVisitorCount(1450);
           }
         } else {
           // Just get current count without incrementing
@@ -34,7 +34,7 @@ export default function Home() {
           if (typeof data.count === 'number') {
             setVisitorCount(data.count);
           } else {
-            setVisitorCount(1000);
+            setVisitorCount(1450);
           }
         }
       } catch (error) {
@@ -43,7 +43,7 @@ export default function Home() {
         const launchDate = new Date('2024-01-01');
         const today = new Date();
         const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
-        const estimatedVisitors = 1000 + (daysSinceLaunch * 3); // ~3 visitors per day growth
+        const estimatedVisitors = 1450 + (daysSinceLaunch * 3); // ~3 visitors per day growth
         setVisitorCount(estimatedVisitors);
       }
     };
