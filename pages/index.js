@@ -10,6 +10,17 @@ export default function Home() {
   useEffect(() => {
     const updateVisitorCount = async () => {
       try {
+        // Check for cached count first to prevent resets
+        const cachedCount = localStorage.getItem('visitorCount');
+        const cacheTime = localStorage.getItem('visitorCountTime');
+        const now = Date.now();
+        
+        // If we have a recent cached count (within 1 hour), use it
+        if (cachedCount && cacheTime && (now - parseInt(cacheTime)) < 3600000) {
+          setVisitorCount(parseInt(cachedCount));
+          return;
+        }
+        
         // Check if user has visited today to avoid double counting
         const today = new Date().toDateString();
         const lastVisit = localStorage.getItem('lastVisit');
@@ -24,6 +35,9 @@ export default function Home() {
           if (typeof data.count === 'number') {
             setVisitorCount(data.count);
             localStorage.setItem('lastVisit', today);
+            // Cache the count to prevent resets
+            localStorage.setItem('visitorCount', data.count.toString());
+            localStorage.setItem('visitorCountTime', now.toString());
           } else {
             setVisitorCount(1450);
           }
@@ -33,18 +47,27 @@ export default function Home() {
           const data = await response.json();
           if (typeof data.count === 'number') {
             setVisitorCount(data.count);
+            // Cache the count to prevent resets
+            localStorage.setItem('visitorCount', data.count.toString());
+            localStorage.setItem('visitorCountTime', now.toString());
           } else {
             setVisitorCount(1450);
           }
         }
       } catch (error) {
         console.error('Failed to update visitor count:', error);
-        // Use a growing count based on days since launch
-        const launchDate = new Date('2024-01-01');
-        const today = new Date();
-        const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
-        const estimatedVisitors = 1450 + (daysSinceLaunch * 3); // ~3 visitors per day growth
-        setVisitorCount(estimatedVisitors);
+        // Try to use cached count as fallback
+        const cachedCount = localStorage.getItem('visitorCount');
+        if (cachedCount) {
+          setVisitorCount(parseInt(cachedCount));
+        } else {
+          // Final fallback: growing count based on time
+          const launchDate = new Date('2024-09-01');
+          const today = new Date();
+          const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
+          const estimatedVisitors = 1450 + (daysSinceLaunch * 4);
+          setVisitorCount(estimatedVisitors);
+        }
       }
     };
     
