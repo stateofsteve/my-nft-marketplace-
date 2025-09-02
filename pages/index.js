@@ -61,12 +61,8 @@ export default function Home() {
         if (cachedCount) {
           setVisitorCount(parseInt(cachedCount));
         } else {
-          // Final fallback: growing count based on time
-          const launchDate = new Date('2024-09-01');
-          const today = new Date();
-          const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
-          const estimatedVisitors = 1450 + (daysSinceLaunch * 4);
-          setVisitorCount(estimatedVisitors);
+          // Final fallback: just show base count
+          setVisitorCount(1450);
         }
       }
     };
