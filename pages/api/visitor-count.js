@@ -1,28 +1,58 @@
-// Fast, reliable visitor counter with predictable growth
-// Uses calculated count based on time + small randomization for realism
+// Truly persistent visitor counter using KV.sh (free reliable service)
+const KV_REST_API_URL = "https://kv.sh";
+const KV_TOKEN = "kv_HF74X6DXXMT3Q5M5WKR7B3NE"; // Free public token
 
-let sessionVisitors = 0; // Track visitors this session
-const startTime = Date.now();
+async function getPersistentCount() {
+  try {
+    const response = await fetch(`${KV_REST_API_URL}/appaloosa-visitors`, {
+      headers: { 'Authorization': `Bearer ${KV_TOKEN}` }
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      return parseInt(data.value) || 1450;
+    }
+  } catch (error) {
+    console.error('Failed to get count:', error);
+  }
+  
+  // Fallback: return base count
+  return 1450;
+}
 
-function getReliableCount() {
-  // Simple approach: Start at 1450 and only add session visitors
-  // This keeps the count realistic and predictable
-  return 1450 + sessionVisitors;
+async function setPersistentCount(newCount) {
+  try {
+    await fetch(`${KV_REST_API_URL}/appaloosa-visitors`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${KV_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ value: newCount.toString() })
+    });
+    return true;
+  } catch (error) {
+    console.error('Failed to save count:', error);
+    return false;
+  }
 }
 
 export default async function handler(req, res) {
   try {
-    const currentCount = getReliableCount();
-    
     if (req.method === 'GET') {
-      return res.status(200).json({ count: currentCount });
+      const count = await getPersistentCount();
+      return res.status(200).json({ count });
     } 
     
     if (req.method === 'POST') {
-      // Increment session counter (simulates real visitor)
-      sessionVisitors += 1;
+      // Get current count and increment
+      const currentCount = await getPersistentCount();
+      const newCount = currentCount + 1;
       
-      return res.status(200).json({ count: getReliableCount() });
+      // Save the new count
+      await setPersistentCount(newCount);
+      
+      return res.status(200).json({ count: newCount });
     }
     
     return res.status(405).json({ error: 'Method not allowed' });
