@@ -5,3 +5,7 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Visitor counter files
+visitor-backup.txt
+visitor-count.json
