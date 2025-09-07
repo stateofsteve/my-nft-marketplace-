@@ -23,12 +23,13 @@ export default function Lore() {
       </header>
 
       <nav className="main-nav">
-        <a href="/" className="nav-link">Home</a>
-        <a href="/thestables" className="nav-link">The Stables</a>
-        <a href="/lore" className="nav-link primary">Explore the Lore</a>
-        <a href="/roadmap" className="nav-link">Roadmap</a>
-        <a href="/therunes" className="nav-link">The Runes</a>
-      </nav>
+  <a href="/" className="nav-link">Home</a>
+  <a href="/thestables" className="nav-link">The Stables</a>
+  <a href="/lore" className="nav-link primary">Explore the Lore</a>
+  <a href="/roadmap" className="nav-link">Roadmap</a>
+  <a href="/therunes" className="nav-link">The Runes</a>
+  <a href="/thepixels" className="nav-link">The Pixels</a>
+</nav>
 
       <main>
         {/* Hero Section */}

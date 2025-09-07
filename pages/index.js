@@ -86,14 +86,15 @@ export default function Home() {
             priority
           />
           <div className="title-container">
-            <h1 className="title-main">Appaloosa Dreams</h1>
-            <nav className="header-nav">
-             <a href="/thestables" className="nav-link primary">The Stables</a>
-              <a href="/lore" className="nav-link">Explore the Lore</a>
-              <a href="/roadmap" className="nav-link">Roadmap</a>
-              <a href="/therunes" className="nav-link">The Runes</a>
-            </nav>
-          </div>
+  <h1 className="title-main">Appaloosa Dreams</h1>
+  <nav className="header-nav">
+    <a href="/thestables" className="nav-link primary">The Stables</a>
+    <a href="/lore" className="nav-link">Explore the Lore</a>
+    <a href="/roadmap" className="nav-link">Roadmap</a>
+    <a href="/therunes" className="nav-link">The Runes</a>
+    <a href="/thepixels" className="nav-link">The Pixels</a>
+  </nav>
+</div>
         </div>
       </header>
 
