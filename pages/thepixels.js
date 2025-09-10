@@ -170,55 +170,6 @@ function PixelNFTCard({ listing, marketplace }) {
   // Load actual NFT data from collection
   const { data: nft, isLoading: nftLoading, error: nftError } = useNFT(nftCollection, tokenId);
 
-  // Debug function to check listing validity
-  const debugListing = async () => {
-    try {
-      console.log("=== LISTING DEBUG INFO ===");
-      console.log("Listing ID:", listingId);
-      console.log("Token ID:", tokenId);
-      console.log("Price (ETH):", priceInEth);
-      console.log("Buyer address:", address);
-      
-      // Check if listing still exists and is valid
-      const listingInfo = await marketplace.call("getListing", [listingId]);
-      console.log("Current listing status:", listingInfo);
-      
-      // Check buyer's ETH balance using Web3
-      try {
-        const provider = marketplace.getProvider?.() || marketplace.provider;
-        if (provider) {
-          const balance = await provider.getBalance(address);
-          const balanceInEth = ethers.utils.formatEther(balance);
-          console.log("Buyer balance:", balanceInEth, "ETH");
-          
-          // Check if buyer has enough ETH
-          const requiredETH = parseFloat(priceInEth) + 0.01; // price + estimated gas
-          console.log("Required ETH (including gas):", requiredETH);
-          console.log("Has enough balance?", parseFloat(balanceInEth) >= requiredETH);
-        } else {
-          console.log("Cannot check balance - provider not available");
-        }
-      } catch (balanceError) {
-        console.log("Could not check balance:", balanceError.message);
-      }
-      
-      // Check marketplace contract state
-      const totalListings = await marketplace.call("totalListings");
-      console.log("Total listings in marketplace:", totalListings.toString());
-      
-      // Check the specific listing details
-      console.log("=== DETAILED LISTING INFO ===");
-      console.log("Listing object:", listing);
-      console.log("Listing status:", listingInfo.status);
-      console.log("Listing seller:", listingInfo.listingCreator);
-      console.log("Asset contract:", listingInfo.assetContract);
-      console.log("Token ID in listing:", listingInfo.tokenId?.toString());
-      
-    } catch (error) {
-      console.error("Debug error:", error);
-    }
-  };
-
   return (
     <div className="nft-card pixel-card">
       <div style={{
@@ -268,76 +219,26 @@ function PixelNFTCard({ listing, marketplace }) {
           {nft?.metadata?.description || 'A digital companion piece featuring pixel art interpretation of the mystical horses.'}
         </p>
         
-        {/* DEBUG SECTION - Add this temporarily */}
-        <div style={{ background: '#333', padding: '10px', margin: '10px 0', borderRadius: '5px' }}>
-          <button 
-            onClick={debugListing}
-            style={{ 
-              background: '#007bff', 
-              color: 'white', 
-              border: 'none', 
-              padding: '5px 10px', 
-              borderRadius: '3px',
-              cursor: 'pointer',
-              marginBottom: '10px'
-            }}
-          >
-            🔍 Debug This Listing
-          </button>
-          <div style={{ fontSize: '12px', color: '#ccc' }}>
-            <div>Listing ID: {listingId}</div>
-            <div>Token ID: {tokenId}</div>
-            <div>Price: {priceInEth} ETH</div>
-          </div>
-        </div>
-        
         <div className="price-section">
           <Web3Button
             contractAddress={MARKETPLACE_ADDRESS}
             action={async (contract) => {
-              try {
-                console.log("🔥 ATTEMPTING PURCHASE...");
-                console.log("Listing ID:", listingId);
-                console.log("Token ID:", tokenId);
-                console.log("Buyer:", address);
-                console.log("Price:", listing.pricePerToken?.toString());
-                
-                // Verify the listing exists first
-                const listingData = await contract.call("getListing", [listingId]);
-                console.log("Listing verification:", listingData);
-                
-                // Make sure we're using the correct listing ID (convert to number)
-                const numericListingId = parseInt(listingId);
-                
-                const tx = await contract.call("buyFromListing", [
-                  numericListingId,  // Use numeric listing ID
-                  address,
-                  1,
-                  "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-                  listing.pricePerToken
-                ]);
-                
-                console.log("✅ Purchase transaction successful:", tx);
-                return tx;
-              } catch (error) {
-                console.error("❌ Purchase failed:", error);
-                console.error("Error details:", {
-                  listingId,
-                  tokenId,
-                  address,
-                  price: listing.pricePerToken?.toString()
-                });
-                throw error;
-              }
+              const tx = await contract.call("buyFromListing", [
+                listingId,
+                address,
+                1,
+                "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+                listing.pricePerToken
+              ]);
+              return tx;
             }}
-            onSuccess={(result) => {
-              console.log("🎉 Purchase confirmed:", result);
+            onSuccess={() => {
               alert(`Successfully purchased ${nft?.metadata?.name || `Pixel #${tokenId}`}!`);
               window.location.reload();
             }}
             onError={(error) => {
-              console.error("💥 Purchase error:", error);
-              alert(`Purchase failed: ${error.message || "Unknown error"}. Check console for details.`);
+              console.error("Purchase failed:", error);
+              alert("Purchase failed. Please try again.");
             }}
           >
             Buy Now - {priceInEth} ETH
