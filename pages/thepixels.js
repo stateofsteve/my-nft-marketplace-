@@ -183,19 +183,36 @@ function PixelNFTCard({ listing, marketplace }) {
       const listingInfo = await marketplace.call("getListing", [listingId]);
       console.log("Current listing status:", listingInfo);
       
-      // Check buyer's ETH balance
-      const balance = await marketplace.provider.getBalance(address);
-      const balanceInEth = ethers.utils.formatEther(balance);
-      console.log("Buyer balance:", balanceInEth, "ETH");
-      
-      // Check if buyer has enough ETH
-      const requiredETH = parseFloat(priceInEth) + 0.01; // price + estimated gas
-      console.log("Required ETH (including gas):", requiredETH);
-      console.log("Has enough balance?", parseFloat(balanceInEth) >= requiredETH);
+      // Check buyer's ETH balance using Web3
+      try {
+        const provider = marketplace.getProvider?.() || marketplace.provider;
+        if (provider) {
+          const balance = await provider.getBalance(address);
+          const balanceInEth = ethers.utils.formatEther(balance);
+          console.log("Buyer balance:", balanceInEth, "ETH");
+          
+          // Check if buyer has enough ETH
+          const requiredETH = parseFloat(priceInEth) + 0.01; // price + estimated gas
+          console.log("Required ETH (including gas):", requiredETH);
+          console.log("Has enough balance?", parseFloat(balanceInEth) >= requiredETH);
+        } else {
+          console.log("Cannot check balance - provider not available");
+        }
+      } catch (balanceError) {
+        console.log("Could not check balance:", balanceError.message);
+      }
       
       // Check marketplace contract state
       const totalListings = await marketplace.call("totalListings");
       console.log("Total listings in marketplace:", totalListings.toString());
+      
+      // Check the specific listing details
+      console.log("=== DETAILED LISTING INFO ===");
+      console.log("Listing object:", listing);
+      console.log("Listing status:", listingInfo.status);
+      console.log("Listing seller:", listingInfo.listingCreator);
+      console.log("Asset contract:", listingInfo.assetContract);
+      console.log("Token ID in listing:", listingInfo.tokenId?.toString());
       
     } catch (error) {
       console.error("Debug error:", error);
